@@ -59,7 +59,7 @@ tell application "System Events"
 						end tell
 					end tell
 					if (count of menus) is greater than 0 then
-						-- The context menu was here in Monterey.
+						-- In Monterey, the context menu was here for some reason.
 						set contextMenuFound to true
 						tell the first menu
 							try
@@ -75,7 +75,7 @@ tell application "System Events"
 				end tell
 			end tell
 			if contextMenuFound is false then
-				-- in Big Sur, the context menu sensibly belongs to the window.
+				-- In Big Sur, the context menu sensibly belongs to the window.
 				tell the first window
 					-- Weird bug where selecting the menu directly (`tell first menu`) didn't work.
 					tell (the first UI element whose description is "menu")
