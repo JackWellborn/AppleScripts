@@ -1,7 +1,6 @@
 set useUIAutomation to false
 tell application "System Events"
 	tell application "Music"
-		
 		set {artistName, albumName, songName, songLength} to the {artist, album, name, time} of the current track
 		set matchedTracks to (every track whose name is songName and album is albumName and artist is artistName)
 		
@@ -21,8 +20,6 @@ tell application "System Events"
 				activate
 			end try
 		end if
-		
-		
 	end tell
 	
 	if useUIAutomation is true then
@@ -92,6 +89,7 @@ tell application "System Events"
 			end if
 		end tell
 	end if
+	
 	tell application "Music"
 		(* There also doesn't seem to by a way to deterministically identify the duplicated library track so I am using a handful of criteria to find it. Additionally, duplicating the track to the library takes a few seconds so I am using a while loop to constantly check when we can get songs that match the provided criteria, which includes song length for added specificity. *)
 		
