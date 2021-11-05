@@ -31,7 +31,7 @@ tell application "System Events"
 				tell group 1
 					tell group 1
 						tell scroll area 1
-							set appleMusic to the first UI element whose description is "Apple Music"
+							set appleMusic to the first UI element
 							tell appleMusic
 								tell table 1 in group 3
 									repeat with currentRow in rows
