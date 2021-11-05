@@ -75,7 +75,7 @@ tell application "System Events"
 				end tell
 			end tell
 			if contextMenuFound is false then
-				-- in Big Sur, the the context menu belonged to window.
+				-- in Big Sur, the context menu sensibly belongs to the window.
 				tell the first window
 					-- Weird bug where selecting the menu directly (`tell first menu`) didn't work.
 					tell (the first UI element whose description is "menu")
