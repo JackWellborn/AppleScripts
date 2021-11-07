@@ -1,524 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>AMApplicationBuild</key>
-	<string>509</string>
-	<key>AMApplicationVersion</key>
-	<string>2.10</string>
-	<key>AMDocumentVersion</key>
-	<string>2</string>
-	<key>actions</key>
-	<array>
-		<dict>
-			<key>action</key>
-			<dict>
-				<key>AMAccepts</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Optional</key>
-					<true/>
-					<key>Types</key>
-					<array>
-						<string>com.apple.applescript.object</string>
-					</array>
-				</dict>
-				<key>AMActionVersion</key>
-				<string>1.0.2</string>
-				<key>AMApplication</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>AMParameterProperties</key>
-				<dict>
-					<key>source</key>
-					<dict/>
-				</dict>
-				<key>AMProvides</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Types</key>
-					<array>
-						<string>com.apple.applescript.object</string>
-					</array>
-				</dict>
-				<key>ActionBundlePath</key>
-				<string>/System/Library/Automator/Run AppleScript.action</string>
-				<key>ActionName</key>
-				<string>Run AppleScript</string>
-				<key>ActionParameters</key>
-				<dict>
-					<key>source</key>
-					<string>on run {input, parameters}		(* Your script goes here *)		return 60end run</string>
-				</dict>
-				<key>BundleIdentifier</key>
-				<string>com.apple.Automator.RunScript</string>
-				<key>CFBundleVersion</key>
-				<string>1.0.2</string>
-				<key>CanShowSelectedItemsWhenRun</key>
-				<false/>
-				<key>CanShowWhenRun</key>
-				<true/>
-				<key>Category</key>
-				<array>
-					<string>AMCategoryUtilities</string>
-				</array>
-				<key>Class Name</key>
-				<string>RunScriptAction</string>
-				<key>InputUUID</key>
-				<string>E52370F2-CC94-497E-A253-3FA53DB94E06</string>
-				<key>Keywords</key>
-				<array>
-					<string>Run</string>
-				</array>
-				<key>OutputUUID</key>
-				<string>D020E853-6B4C-4B24-98B4-A41F773E313F</string>
-				<key>UUID</key>
-				<string>A254D31A-0168-40D8-B2FD-2A0426537273</string>
-				<key>UnlocalizedApplications</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>arguments</key>
-				<dict>
-					<key>0</key>
-					<dict>
-						<key>default value</key>
-						<string>on run {input, parameters}
-	
-	(* Your script goes here *)
-	
-	return input
-end run</string>
-						<key>name</key>
-						<string>source</string>
-						<key>required</key>
-						<string>0</string>
-						<key>type</key>
-						<string>0</string>
-						<key>uuid</key>
-						<string>0</string>
-					</dict>
-				</dict>
-				<key>isViewVisible</key>
-				<integer>1</integer>
-				<key>location</key>
-				<string>952.500000:368.000000</string>
-				<key>nibPath</key>
-				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
-			</dict>
-			<key>isViewVisible</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>action</key>
-			<dict>
-				<key>AMAccepts</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Optional</key>
-					<true/>
-					<key>Types</key>
-					<array>
-						<string>com.apple.applescript.object</string>
-					</array>
-				</dict>
-				<key>AMActionVersion</key>
-				<string>1.0.2</string>
-				<key>AMApplication</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>AMParameterProperties</key>
-				<dict>
-					<key>source</key>
-					<dict/>
-				</dict>
-				<key>AMProvides</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Types</key>
-					<array>
-						<string>com.apple.applescript.object</string>
-					</array>
-				</dict>
-				<key>ActionBundlePath</key>
-				<string>/System/Library/Automator/Run AppleScript.action</string>
-				<key>ActionName</key>
-				<string>Run AppleScript</string>
-				<key>ActionParameters</key>
-				<dict>
-					<key>source</key>
-					<string>on run {input, parameters}	set useUIAutomation to false	tell application "System Events"		tell application "Music"						set {artistName, albumName, songName, songLength} to the {artist, album, name, time} of the current track			set matchedTracks to (every track whose name is songName and album is albumName and artist is artistName)						-- We don't want to add tracks from Apple Music that have already been added to the library via other means.									(* As far as I can tell, there is now way to tell if the current track is playing  from Apple Music, so I am using "cloud status" as proxy in that Apple Music  tracks not in our libary seem to have `missing value` as the cloud status. I am assumung the current track is in our library if cloud status has a value. The good news is that Music doesn't seem to re-add tracks already added. *)						if cloud status of current track is missing value and (count of matchedTracks) is 0 then				try					duplicate current track to source "Library"				on error					(* The above only works from songs played from albums on Apple Music. It doesn’t work if the song happens to be playing from a “station”. For songs playing on stations we have to use UI automation to add the track to the library. Did you just vomit a litte? Yeah, me too. *)					set useUIAutomation to true					activate				end try			end if								end tell				if useUIAutomation is true then			tell process "Music"				keystroke "l" using command down				delay 1				set topLevel to (the first splitter group of window 1)				tell topLevel					tell group 1						tell group 1							tell scroll area 1								set appleMusic to the first UI element								tell appleMusic									tell table 1 in group 3										repeat with currentRow in rows											tell the second UI element of currentRow												set rowTitle to ""												if the role of the first UI element is "AXGroup" then													-- explicit songs use a different layout													set rowTitle to the (title of first checkbox in group 1)												else													set rowTitle to the title of the first checkbox												end if																								if rowTitle is songName then													tell the third UI element of currentRow														description of UI elements in group 3														click first button in group 3														activate													end tell													exit repeat												end if											end tell										end repeat									end tell								end tell							end tell						end tell						if (count of menus) is greater than 0 then							-- In Monterey, the context menu was here for some reason.							set contextMenuFound to true							tell the first menu								try									click (the first menu item whose title is "Add to Library")									delay 3								on error									key code 53								end try							end tell						else							set contextMenuFound to false						end if					end tell				end tell				if contextMenuFound is false then					-- In Big Sur, the context menu sensibly belongs to the window.					tell the first window						-- Weird bug where selecting the menu directly (`tell first menu`) didn't work.						tell (the first UI element whose description is "menu")							try								click (the first menu item whose title is "Add to Library")								delay 3							on error								key code 53							end try						end tell					end tell				end if			end tell		end if						tell application "Music"			(* There also doesn't seem to by a way to deterministically identify the duplicated library track so I am using a handful of criteria to find it. Additionally, duplicating the track to the library takes a few seconds so I am using a while loop to constantly check when we can get songs that match the provided criteria, which includes song length for added specificity. *)						set matchedTracks to (every track whose name is songName and album is albumName and artist is artistName and time is songLength)						repeat while (count of matchedTracks) is 0				set matchedTracks to (every track whose name is songName and album is albumName and artist is artistName and time is songLength)			end repeat			set matchingTrack to first item of matchedTracks						set the rating of the matchingTrack to the (first item of input) * 1						if the rating of the matchingTrack is greater than or equal to 80 then				set disliked of the matchingTrack to false				set loved of the matchingTrack to true			end if						if the rating of the matchingTrack is less than or equal to 40 then				set loved of the matchingTrack to false				set disliked of the matchingTrack to true			end if						set {updatedArtist, updatedAlbum, updatedSong, updatedRating} to the {artist, album, name, rating} of the matchingTrack						set singleDigitRating to updatedRating / 20			set starRating to ""			repeat singleDigitRating times				set starRating to starRating &amp; "★"			end repeat						set response to "Rated “" &amp; updatedSong &amp; "“ by " &amp; updatedArtist &amp; " to " &amp; starRating		end tell	end tell	return responseend run</string>
-				</dict>
-				<key>BundleIdentifier</key>
-				<string>com.apple.Automator.RunScript</string>
-				<key>CFBundleVersion</key>
-				<string>1.0.2</string>
-				<key>CanShowSelectedItemsWhenRun</key>
-				<false/>
-				<key>CanShowWhenRun</key>
-				<true/>
-				<key>Category</key>
-				<array>
-					<string>AMCategoryUtilities</string>
-				</array>
-				<key>Class Name</key>
-				<string>RunScriptAction</string>
-				<key>InputUUID</key>
-				<string>6E82C4D9-D54B-4B20-9588-257748050DA1</string>
-				<key>Keywords</key>
-				<array>
-					<string>Run</string>
-				</array>
-				<key>OutputUUID</key>
-				<string>CF453D32-857D-4D0D-B3F2-33325E9C6EF9</string>
-				<key>UUID</key>
-				<string>EA2E744B-81C9-4BAC-891E-97309C9B57D4</string>
-				<key>UnlocalizedApplications</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>arguments</key>
-				<dict>
-					<key>0</key>
-					<dict>
-						<key>default value</key>
-						<string>on run {input, parameters}
-	
-	(* Your script goes here *)
-	
-	return input
-end run</string>
-						<key>name</key>
-						<string>source</string>
-						<key>required</key>
-						<string>0</string>
-						<key>type</key>
-						<string>0</string>
-						<key>uuid</key>
-						<string>0</string>
-					</dict>
-				</dict>
-				<key>isViewVisible</key>
-				<integer>1</integer>
-				<key>location</key>
-				<string>952.500000:613.000000</string>
-				<key>nibPath</key>
-				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
-			</dict>
-			<key>isViewVisible</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>action</key>
-			<dict>
-				<key>AMAccepts</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Optional</key>
-					<false/>
-					<key>Types</key>
-					<array>
-						<string>*</string>
-					</array>
-				</dict>
-				<key>AMActionVersion</key>
-				<string>v.1.0.2</string>
-				<key>AMApplication</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>AMParameterProperties</key>
-				<dict>
-					<key>variableUUID</key>
-					<dict>
-						<key>isPathPopUp</key>
-						<false/>
-						<key>selectedVariableUUID</key>
-						<string>444B23B7-145F-4822-85C9-35CB9C03490E</string>
-					</dict>
-				</dict>
-				<key>AMProvides</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Types</key>
-					<array>
-						<string>*</string>
-					</array>
-				</dict>
-				<key>AMRequiredResources</key>
-				<array/>
-				<key>ActionBundlePath</key>
-				<string>/System/Library/Automator/Set Value of Variable.action</string>
-				<key>ActionName</key>
-				<string>Set Value of Variable</string>
-				<key>ActionParameters</key>
-				<dict>
-					<key>variableUUID</key>
-					<string>444B23B7-145F-4822-85C9-35CB9C03490E</string>
-				</dict>
-				<key>BundleIdentifier</key>
-				<string>com.apple.Automator.SetValueofVariable</string>
-				<key>CFBundleVersion</key>
-				<string>1.0.2</string>
-				<key>CanShowSelectedItemsWhenRun</key>
-				<true/>
-				<key>CanShowWhenRun</key>
-				<true/>
-				<key>Category</key>
-				<array>
-					<string>AMCategoryUtilities</string>
-				</array>
-				<key>Class Name</key>
-				<string>Set_Value_of_Variable</string>
-				<key>InputUUID</key>
-				<string>5A883A86-7B3D-4D1B-B10D-3A7FE37A2C21</string>
-				<key>Keywords</key>
-				<array>
-					<string>variable</string>
-					<string>binding</string>
-					<string>input</string>
-					<string>output</string>
-					<string>storage</string>
-				</array>
-				<key>OutputUUID</key>
-				<string>ADE2A00B-B920-4B39-8BAB-A6557C63D0F4</string>
-				<key>UUID</key>
-				<string>31F9DF18-41E5-4F44-A2B3-DC1108E6C169</string>
-				<key>UnlocalizedApplications</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>arguments</key>
-				<dict>
-					<key>0</key>
-					<dict>
-						<key>default value</key>
-						<string></string>
-						<key>name</key>
-						<string>variableUUID</string>
-						<key>required</key>
-						<string>0</string>
-						<key>type</key>
-						<string>0</string>
-						<key>uuid</key>
-						<string>0</string>
-					</dict>
-				</dict>
-				<key>isViewVisible</key>
-				<integer>1</integer>
-				<key>location</key>
-				<string>952.500000:716.000000</string>
-				<key>nibPath</key>
-				<string>/System/Library/Automator/Set Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
-			</dict>
-			<key>isViewVisible</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>action</key>
-			<dict>
-				<key>AMAccepts</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Optional</key>
-					<true/>
-					<key>Types</key>
-					<array/>
-				</dict>
-				<key>AMActionVersion</key>
-				<string>v.1.0</string>
-				<key>AMApplication</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>AMParameterProperties</key>
-				<dict>
-					<key>message</key>
-					<dict>
-						<key>tokenizedValue</key>
-						<array>
-							<string>$(444B23B7-145F-4822-85C9-35CB9C03490E)</string>
-						</array>
-					</dict>
-					<key>subtitle</key>
-					<dict/>
-					<key>title</key>
-					<dict>
-						<key>tokenizedValue</key>
-						<array>
-							<string>Rated Song</string>
-						</array>
-					</dict>
-				</dict>
-				<key>AMProvides</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Types</key>
-					<array/>
-				</dict>
-				<key>ActionBundlePath</key>
-				<string>/System/Library/Automator/Display Notification.action</string>
-				<key>ActionName</key>
-				<string>Display Notification</string>
-				<key>ActionParameters</key>
-				<dict>
-					<key>message</key>
-					<string>$(444B23B7-145F-4822-85C9-35CB9C03490E)</string>
-					<key>subtitle</key>
-					<string></string>
-					<key>title</key>
-					<string>Rated Song</string>
-				</dict>
-				<key>BundleIdentifier</key>
-				<string>com.apple.Automator.Display-Notification</string>
-				<key>CFBundleVersion</key>
-				<string>1.0</string>
-				<key>CanShowSelectedItemsWhenRun</key>
-				<true/>
-				<key>CanShowWhenRun</key>
-				<false/>
-				<key>Category</key>
-				<array>
-					<string>AMCategoryUtilities</string>
-				</array>
-				<key>Class Name</key>
-				<string>AMDisplayNotificationAction</string>
-				<key>InputUUID</key>
-				<string>1EF36D72-561C-4839-B4AA-50E3BA8330AB</string>
-				<key>Keywords</key>
-				<array/>
-				<key>OutputUUID</key>
-				<string>F2BCEA2E-BC3B-452B-BF08-9D552D1A0575</string>
-				<key>UUID</key>
-				<string>79E53619-13DE-46B4-8099-CE336533CFDD</string>
-				<key>UnlocalizedApplications</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>arguments</key>
-				<dict>
-					<key>0</key>
-					<dict>
-						<key>default value</key>
-						<string></string>
-						<key>name</key>
-						<string>message</string>
-						<key>required</key>
-						<string>0</string>
-						<key>type</key>
-						<string>0</string>
-						<key>uuid</key>
-						<string>0</string>
-					</dict>
-					<key>1</key>
-					<dict>
-						<key>default value</key>
-						<string></string>
-						<key>name</key>
-						<string>subtitle</string>
-						<key>required</key>
-						<string>0</string>
-						<key>type</key>
-						<string>0</string>
-						<key>uuid</key>
-						<string>1</string>
-					</dict>
-					<key>2</key>
-					<dict>
-						<key>default value</key>
-						<string></string>
-						<key>name</key>
-						<string>title</string>
-						<key>required</key>
-						<string>0</string>
-						<key>type</key>
-						<string>0</string>
-						<key>uuid</key>
-						<string>2</string>
-					</dict>
-				</dict>
-				<key>isViewVisible</key>
-				<integer>1</integer>
-				<key>location</key>
-				<string>952.500000:905.000000</string>
-				<key>nibPath</key>
-				<string>/System/Library/Automator/Display Notification.action/Contents/Resources/Base.lproj/main.nib</string>
-			</dict>
-			<key>isViewVisible</key>
-			<integer>1</integer>
-		</dict>
-	</array>
-	<key>connectors</key>
-	<dict>
-		<key>0BF2C6C9-4213-40B9-888D-FF487EA9DC73</key>
-		<dict>
-			<key>from</key>
-			<string>EA2E744B-81C9-4BAC-891E-97309C9B57D4 - EA2E744B-81C9-4BAC-891E-97309C9B57D4</string>
-			<key>to</key>
-			<string>31F9DF18-41E5-4F44-A2B3-DC1108E6C169 - 31F9DF18-41E5-4F44-A2B3-DC1108E6C169</string>
-		</dict>
-		<key>7D4174F7-82D0-4DA8-AB36-39AF62A0A954</key>
-		<dict>
-			<key>from</key>
-			<string>31F9DF18-41E5-4F44-A2B3-DC1108E6C169 - 31F9DF18-41E5-4F44-A2B3-DC1108E6C169</string>
-			<key>to</key>
-			<string>79E53619-13DE-46B4-8099-CE336533CFDD - 79E53619-13DE-46B4-8099-CE336533CFDD</string>
-		</dict>
-		<key>F9573115-5C6B-476E-9F3C-4314577D3E69</key>
-		<dict>
-			<key>from</key>
-			<string>A254D31A-0168-40D8-B2FD-2A0426537273 - A254D31A-0168-40D8-B2FD-2A0426537273</string>
-			<key>to</key>
-			<string>EA2E744B-81C9-4BAC-891E-97309C9B57D4 - EA2E744B-81C9-4BAC-891E-97309C9B57D4</string>
-		</dict>
-	</dict>
-	<key>variables</key>
-	<array>
-		<dict>
-			<key>UUID</key>
-			<string>444B23B7-145F-4822-85C9-35CB9C03490E</string>
-			<key>identifier</key>
-			<string>com.apple.Automator.Variable.Storage</string>
-			<key>name</key>
-			<string>rating</string>
-		</dict>
-	</array>
-	<key>workflowMetaData</key>
-	<dict>
-		<key>applicationBundleIDsByPath</key>
-		<dict/>
-		<key>applicationPaths</key>
-		<array/>
-		<key>inputTypeIdentifier</key>
-		<string>com.apple.Automator.nothing</string>
-		<key>outputTypeIdentifier</key>
-		<string>com.apple.Automator.nothing</string>
-		<key>presentationMode</key>
-		<integer>11</integer>
-		<key>processesInput</key>
-		<integer>0</integer>
-		<key>serviceInputTypeIdentifier</key>
-		<string>com.apple.Automator.nothing</string>
-		<key>serviceOutputTypeIdentifier</key>
-		<string>com.apple.Automator.nothing</string>
-		<key>serviceProcessesInput</key>
-		<integer>0</integer>
-		<key>systemImageName</key>
-		<string>NSTouchBarCheck</string>
-		<key>useAutomaticInputType</key>
-		<integer>0</integer>
-		<key>workflowTypeIdentifier</key>
-		<string>com.apple.Automator.servicesMenu</string>
-	</dict>
-</dict>
-</plist>

@@ -18,7 +18,7 @@ You might think that listing out each minuscule step is disingenuous, but each o
 
 ## How (To Use)
 ### Install the Automator Workflows as Services
-1. Download Automator Workflows
+1. Download and uncompress zipped Automator Workflows
 2. Move to "~/Library/Services/" Create a "Services" folder if one does not already exist.
 
 ### Create a Keyboard Shortcut 
