@@ -24,7 +24,7 @@ Why the hell would someone even want to automate something as simple as rating s
 You might think that listing out each minuscule step is disingenuous, but each one takes me farther out of my flow state. Furthermore, getting back to that flow will likely take longer than the seconds it takes to perform those steps. Left to the UI alone, I would likely never curate my library. Automation bound to keyboard shortcut lets me add music to the library without disrupting my flow state. Once a given song is added, I can then easily pass it to some other automation to rate it, add it to a playlist, etc...
 
 ## How (To Get)
-### Shortcuts (Recommended)
+### Shortcuts
 On macOS 12 (Monterey) and higher, you can do this in the included Shortcuts app. 
 
 You can find the Shortcuts for rating below:
@@ -36,10 +36,7 @@ You can find the Shortcuts for rating below:
 * [Rate ⭐⭐⭐⭐ and Love][4]
 * [Rate ⭐⭐⭐⭐⭐ and Love][5]
 
-### Automator
-On macOS 12 and older versions of macOS, you use the [Automator actions found on this Github][gh]. 
-
-### Creating a Keyboard Shortcuts
+#### Creating a Keyboard Shortcuts
 Keyboard shortcuts can be configured directly in the Shortcuts app under "Shortcut Details". Keyboard shortcuts can also be added any service in System Preferences.  
 1. Open **System Preferences**
 2. Open **Keyboard** preference pane
