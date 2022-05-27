@@ -3,12 +3,12 @@
 ## What
 This script rates the current song in Apple's Music app using the input provided. The expected input is as follows:
 
-`0` - (No Stars) and Dislike
-`20` - ⭐ and Dislike
-`40` - ⭐⭐ and Dislike
-`60` - ⭐⭐⭐
-`80` - ⭐⭐⭐⭐ and Love
-`100` - ⭐⭐⭐⭐⭐ and Love
+* `0` - (No Stars) and Dislike
+* `20` - ⭐ and Dislike
+* `40` - ⭐⭐ and Dislike
+* `60` - ⭐⭐⭐
+* `80` - ⭐⭐⭐⭐ and Love
+* `100` - ⭐⭐⭐⭐⭐ and Love
 
 ## Why
 Why the hell would someone even want to automate something as simple as rating songs. I have three reasons. First, I can’t judge a song on first listen. My enjoyment of a given song develops and changes over time. Second, I am not an active music listener which is to say I mostly listen to music while am doing something else. Finally, rating songs in Music is both extremely tedious and incredibly disruptive. The last thing I want to do when listening to Music while working is…
@@ -57,3 +57,9 @@ The Shortcuts and Automator workflows all effectively have three actions.
 Be aware that this solution uses automation to control keyboard input, and access Music. It operates locally, and requires special permissions. That said, this author recommends further scrutiny when any solution requires elevated privileges.
 
 [add]: https://github.com/JackWellborn/AppleScripts/tree/main/Music/Add%20Track%20To%20Library
+[rs]: https://www.icloud.com/shortcuts/70084f7a2af14f7893b83fb612416993
+[1]: https://www.icloud.com/shortcuts/da841a7c79454326b6e75feffd084777
+[2]: https://www.icloud.com/shortcuts/7c7e7db7b8e646a994a55f4134e3b205
+[3]: https://www.icloud.com/shortcuts/f8c374b9c3a947ca9619a146d3c4cc73
+[4]: https://www.icloud.com/shortcuts/27a27eb733534f8fb9b10b4a20ea8732
+[5]: https://www.icloud.com/shortcuts/c7a4efc7549f4112823aff1df61d607c
